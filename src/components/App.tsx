@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import SocketIODemo from "./components/SocketIODemo";
+import SocketIODemo from "./SocketIODemo";
 
 function App() {
     const [showDemo, setShowDemo] = useState(true);
