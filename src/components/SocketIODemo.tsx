@@ -21,17 +21,20 @@ function SocketIODemo(): JSX.Element {
         console.log("making connection");
         const newSocket: Socket = io(serverBase);
         console.log("made connection");
+
+        //store the socket
         setSocket(newSocket);
 
-        //register generic listeners
+        //optionally register generic listeners
         newSocket.prependAnyOutgoing((...args) => {
             console.log("socketio outgoing: ", args);
         });
+
         newSocket.prependAny((...args) => {
             console.log("socketio incoming: ", args);
         });
 
-        //register specific listeners
+        //optionally register message-specific listeners
         newSocket.on("storyUpdate", handleReceivedStoryUpdate);
 
         function cleanupSocketIO() {
@@ -56,7 +59,7 @@ function SocketIODemo(): JSX.Element {
                 <input
                     value={textField}
                     onChange={(e) => setTextField(e.target.value)}
-                    onKeyPress={(e) => {
+                    onKeyDown={(e) => {
                         if (e.key === "Enter") {
                             handleAddWordClicked();
                         }
